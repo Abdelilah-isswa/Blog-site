@@ -33,47 +33,6 @@ Category Management (Admin only)
 
 Category Management
 
-🏗️ Project Structure
-
-blog-platform/
-│
-├── app/
-│   ├── controllers/
-│   │   ├── AuthController.php
-│   │   ├── BlogController.php
-│   │   ├── AdminController.php
-│   │   └── CommentController.php
-│   │
-│   ├── models/
-│   │   ├── User.php
-│   │   ├── Post.php
-│   │   ├── Comment.php
-│   │   ├── Category.php
-│   │   └── Like.php
-│   │
-│   └── views/
-│       ├── layouts/
-│       ├── auth/
-│       ├── blog/
-│       ├── admin/
-│       └── partials/
-│
-├── config/
-│   ├── database.php
-│   └── constants.php
-│
-├── public/
-│   ├── css/
-│   ├── js/
-│   ├── images/
-│   └── uploads/
-│
-├── vendor/           # Composer dependencies
-├── .htaccess
-├── index.php         # Front controller
-├── composer.json
-└── README.md
-
 🚀 Installation
 Prerequisites
 PHP 7.4 or higher
