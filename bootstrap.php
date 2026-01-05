@@ -1,28 +1,18 @@
 <?php
-define('ROOT',__DIR__);
-define('APP',ROOT.'/app');
-define('CONFIG',ROOT.'/config');
-define('CORE',ROOT.'/core');
-define('PUBLIC',ROOT.'/public');
-define('VIEWS',APP.'/views');
-spl_autoload_register(function($class){
-    $base_dir = APP .'/';
-    $file = $base_dir .str_replace('\\','/',$class).'php';
-
-    //file exists
-    if(file_exists($file)){
-
+// PSR-4 Autoloader
+spl_autoload_register(function ($className) {
+    // Remove any leading backslash
+    $className = ltrim($className, '\\');
+    
+    // The base directory
+    $baseDir = SRC . '/';
+    
+    // Build the file path
+    $file = $baseDir . str_replace('\\', '/', $className) . '.php';
+    
+    // Load the file if it exists
+    if (file_exists($file)) {
         require $file;
-    };
+    }
 });
-
-session_start();
-require_once CONFIG.'/database.php';
-
-
-
-
-
-
-
-echo $base_dir;
+?>
