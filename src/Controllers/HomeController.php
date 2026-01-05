@@ -6,7 +6,7 @@ use Core\Controller;
 class HomeController extends Controller {
     
 public function index() {
-    echo "<h1>🎉 SUCCESS! MVC is Working!</h1>";
+    
     echo "<p>HomeController loaded successfully!</p>";
     
     echo "<div style='background:#d4edda; padding:15px; margin:10px; border-radius:5px;'>";

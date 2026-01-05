@@ -4,22 +4,22 @@ namespace Core;
 class Router {
     
     public function dispatch($url) {
-        // Split URL into parts
+       
         $parts = explode('/', $url);
         
-        // Get controller name (first part)
+       
         $controllerName = 'HomeController';
         if (!empty($parts[0])) {
             $controllerName = ucfirst($parts[0]) . 'Controller';
         }
         
-        // Get method name (second part)
+        
         $method = 'index';
         if (!empty($parts[1])) {
             $method = $parts[1];
         }
         
-        // Get parameters (rest of the parts)
+       
         $params = array_slice($parts, 2);
         
         // Debug output
@@ -32,30 +32,30 @@ class Router {
             echo "</div>";
         }
         
-        // Build full controller class name
+       
         $controllerClass = "\\Controllers\\" . $controllerName;
         
-        // Check if controller exists
+        
         if (!class_exists($controllerClass)) {
             $this->notFound("Controller '$controllerName' not found");
         }
         
-        // Create controller instance
+        
         $controller = new $controllerClass();
         
-        // Check if method exists
+        
         if (!method_exists($controller, $method)) {
             $this->notFound("Method '$method' not found in $controllerName");
         }
         
-        // Call the controller method with parameters
+        
         call_user_func_array([$controller, $method], $params);
     }
     
     private function notFound($message = '') {
         http_response_code(404);
         
-        // Try to load 404 view
+        
         $viewFile = VIEWS . '/errors/404.php';
         if (file_exists($viewFile)) {
             require $viewFile;
