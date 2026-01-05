@@ -48,7 +48,7 @@ public function index() {
         $host = $_SERVER['HTTP_HOST'];
         $script = $_SERVER['SCRIPT_NAME'];
         
-        // Get project folder from script name
+       
         $projectFolder = dirname($script);
         
         if ($projectFolder === '/') {
