@@ -1,9 +1,4 @@
 RewriteEngine On
-RewriteBase /blog/
-
-# Don't rewrite if it's a real file or directory
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-
-# Rewrite everything to index.php
-RewriteRule ^(.*)$ index.php [L,QSA]
+RewriteRule ^ index.php [QSA,L]
