@@ -50,18 +50,18 @@ class User
     {
         $conn = self::getConnection();
         
-        // Hash the password
+        
         if (isset($data['password'])) {
             $data['user_password'] = password_hash($data['password'], PASSWORD_DEFAULT);
             unset($data['password']);
         }
         
-        // Set default role if not provided
+       
         if (!isset($data['user_role'])) {
             $data['user_role'] = 'Reader';
         }
         
-        // Set creation timestamp
+       
         $data['create_at'] = date('Y-m-d H:i:s');
          
   
@@ -72,10 +72,40 @@ class User
         $sql = "INSERT INTO User ($columns) VALUES ($placeholders)";
         $stmt = $conn->prepare($sql);
         
-        // Bind parameters
+        
         foreach ($data as $key => $value) {
             $stmt->bindValue(':' . $key, $value);
         }
+        
+        return $stmt->execute();
+    }
+
+
+        public static function update($id, $data)
+    {
+        $conn = self::getConnection();
+        
+       
+        if (isset($data['password'])) {
+            $data['user_password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+            unset($data['password']);
+        }
+        
+      
+        $setClause = '';
+        foreach ($data as $key => $value) {
+            $setClause .= "$key = :$key, ";
+        }
+        $setClause = rtrim($setClause, ', ');
+        
+        $sql = "UPDATE User SET $setClause WHERE user_id = :id";
+        $stmt = $conn->prepare($sql);
+        
+        
+        foreach ($data as $key => $value) {
+            $stmt->bindValue(':' . $key, $value);
+        }
+        $stmt->bindValue(':id', $id);
         
         return $stmt->execute();
     }
