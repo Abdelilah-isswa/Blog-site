@@ -46,6 +46,39 @@ class User
     }
     
 
+    public static function create($data)
+    {
+        $conn = self::getConnection();
+        
+        // Hash the password
+        if (isset($data['password'])) {
+            $data['user_password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+            unset($data['password']);
+        }
+        
+        // Set default role if not provided
+        if (!isset($data['user_role'])) {
+            $data['user_role'] = 'Reader';
+        }
+        
+        // Set creation timestamp
+        $data['create_at'] = date('Y-m-d H:i:s');
+         
+  
+    
+        $columns = implode(', ', array_keys($data));
+        $placeholders = ':' . implode(', :', array_keys($data));
+        
+        $sql = "INSERT INTO User ($columns) VALUES ($placeholders)";
+        $stmt = $conn->prepare($sql);
+        
+        // Bind parameters
+        foreach ($data as $key => $value) {
+            $stmt->bindValue(':' . $key, $value);
+        }
+        
+        return $stmt->execute();
+    }
 
 
 }
