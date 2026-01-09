@@ -13,7 +13,7 @@ class LikeController extends Controller
         
         if (!isset($_SESSION['user_id'])) {
             $_SESSION['error'] = 'Please login to like articles';
-            header('Location: /blog2/public/login');
+            header('Location: /blog/public/login');
             exit;
         }
         
@@ -22,7 +22,7 @@ class LikeController extends Controller
         
         if (empty($article_id) || !is_numeric($article_id)) {
             $_SESSION['error'] = 'Invalid article';
-            header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/blog2/public/'));
+            header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/blog/public/'));
             exit;
         }
         
@@ -38,7 +38,7 @@ class LikeController extends Controller
         }
         
        
-        header('Location: /blog2/public/article?id=' . $article_id);
+        header('Location: /blog/public/article?id=' . $article_id);
         exit;
     }
 }

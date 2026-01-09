@@ -22,14 +22,14 @@ public function edit($id = null)
     
     if (!$id) {
         $_SESSION['error'] = 'Article ID required';
-        header('Location: /blog2/public/articles');
+        header('Location: /blog/public/articles');
         exit;
     }
     
     
     if (!isset($_SESSION['user_id'])) {
         $_SESSION['error'] = 'Please login to edit articles';
-        header('Location: /blog2/public/login');
+        header('Location: /blog/public/login');
         exit;
     }
     
@@ -43,7 +43,7 @@ public function edit($id = null)
     
     if (!$article) {
         $_SESSION['error'] = 'Article not found';
-        header('Location: /blog2/public/articles');
+        header('Location: /blog/public/articles');
         exit;
     }
     
@@ -55,7 +55,7 @@ public function edit($id = null)
     
     if (!$isAuthor && !$isAdmin) {
         $_SESSION['error'] = 'You can only edit your own articles';
-        header('Location: /blog2/public/article?id=' . $id);
+        header('Location: /blog/public/article?id=' . $id);
         exit;
     }
     
@@ -84,7 +84,7 @@ public function update($id = null)
     
     // Check if user is logged in
     if (!isset($_SESSION['user_id'])) {
-        header('Location: /blog2/public/login');
+        header('Location: /blog/public/login');
         exit;
     }
     
@@ -93,7 +93,7 @@ public function update($id = null)
     
     if (!$article) {
         $_SESSION['error'] = 'Article not found';
-        header('Location: /blog2/public/articles');
+        header('Location: /blog/public/articles');
         exit;
     }
     
@@ -103,7 +103,7 @@ public function update($id = null)
     
     if (!$isAuthor && !$isAdmin) {
         $_SESSION['error'] = 'You can only edit your own articles';
-        header('Location: /blog2/public/article?id=' . $id);
+        header('Location: /blog/public/article?id=' . $id);
         exit;
     }
     
@@ -115,7 +115,7 @@ public function update($id = null)
     // Validation
     if (empty($title) || empty($content)) {
         $_SESSION['error'] = 'Title and content are required';
-        header('Location: /blog2/public/article/edit?id=' . $id);
+        header('Location: /blog/public/article/edit?id=' . $id);
         exit;
     }
     
@@ -131,11 +131,11 @@ public function update($id = null)
     
     if ($result) {
         $_SESSION['success'] = 'Article updated successfully!';
-        header('Location: /blog2/public/article?id=' . $id);
+        header('Location: /blog/public/article?id=' . $id);
         exit;
     } else {
         $_SESSION['error'] = 'Failed to update article';
-        header('Location: /blog2/public/article/edit?id=' . $id);
+        header('Location: /blog/public/article/edit?id=' . $id);
         exit;
     }
 }
@@ -145,13 +145,13 @@ public function create()
 {
     
     if (!isset($_SESSION['user_id'])) {
-        header('Location: /blog2/public/login');
+        header('Location: /blog/public/login');
         exit;
     }
     
     if ($_SESSION['user_role'] !== 'Author' && $_SESSION['user_role'] !== 'Admin') {
         $_SESSION['error'] = 'Only Authors and Admins can create articles';
-        header('Location: /blog2/public/');
+        header('Location: /blog/public/');
         exit;
     }
     
@@ -176,13 +176,13 @@ public function store()
 {
     // Check if user is logged in and is Author/Admin
     if (!isset($_SESSION['user_id'])) {
-        header('Location: /blog2/public/login');
+        header('Location: /blog/public/login');
         exit;
     }
     
     if ($_SESSION['user_role'] !== 'Author' && $_SESSION['user_role'] !== 'Admin') {
         $_SESSION['error'] = 'Only Authors and Admins can create articles';
-        header('Location: /blog2/public/');
+        header('Location: /blog/public/');
         exit;
     }
     
@@ -195,7 +195,7 @@ public function store()
     // Validation
     if (empty($title) || empty($content)) {
         $_SESSION['error'] = 'Title and content are required';
-        header('Location: /blog2/public/article/create');
+        header('Location: /blog/public/article/create');
         exit;
     }
     
@@ -213,11 +213,11 @@ public function store()
     
     if ($result) {
         $_SESSION['success'] = 'Article created successfully!';
-        header('Location: /blog2/public/articles');
+        header('Location: /blog/public/articles');
         exit;
     } else {
         $_SESSION['error'] = 'Failed to create article. Please try again.';
-        header('Location: /blog2/public/article/create');
+        header('Location: /blog/public/article/create');
         exit;
     }
 }
@@ -313,14 +313,14 @@ public function delete($id = null)
     
     if (!$id) {
         $_SESSION['error'] = 'Article ID required';
-        header('Location: /blog2/public/articles');
+        header('Location: /blog/public/articles');
         exit;
     }
     
    
     if (!isset($_SESSION['user_id'])) {
         $_SESSION['error'] = 'Please login to delete articles';
-        header('Location: /blog2/public/login');
+        header('Location: /blog/public/login');
         exit;
     }
     
@@ -331,7 +331,7 @@ public function delete($id = null)
     
     if (!$article) {
         $_SESSION['error'] = 'Article not found';
-        header('Location: /blog2/public/articles');
+        header('Location: /blog/public/articles');
         exit;
     }
     
@@ -344,7 +344,7 @@ public function delete($id = null)
     
     if (!$isAuthor && !$isAdmin) {
         $_SESSION['error'] = 'You can only delete your own articles';
-        header('Location: /blog2/public/article?id=' . $id);
+        header('Location: /blog/public/article?id=' . $id);
         exit;
     }
     
@@ -353,12 +353,12 @@ public function delete($id = null)
     
     if ($result) {
         $_SESSION['success'] = 'Article deleted successfully!';
-        header('Location: /blog2/public/');
+        header('Location: /blog/public/');
         exit;
         
     } else {
         $_SESSION['error'] = 'Failed to delete article';
-        header('Location: /blog2/public/article?id=' . $id);
+        header('Location: /blog/public/article?id=' . $id);
         exit;
     }
     
@@ -369,7 +369,7 @@ public function myArticles()
    
     if (!isset($_SESSION['user_id'])) {
         $_SESSION['error'] = 'Please login to view your articles';
-        header('Location: /blog2/public/login');
+        header('Location: /blog/public/login');
         exit;
     }
     

@@ -98,8 +98,12 @@ Create/Edit/Delete categories
 
 use case diagram :
 
-![App Screenshot](images/usecase.png)
+![App Screenshot](UMLs/usecase.png)
 
 class diagram :
 
-![App Screenshot](images/class.png)
+![App Screenshot](UMLs/class.png)
+
+ERD diagram :
+
+![App Screenshot](UMLs/ERD.png)

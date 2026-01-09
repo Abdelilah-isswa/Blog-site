@@ -17,7 +17,7 @@ class CommentController extends Controller
        
         if (!isset($_SESSION['user_id'])) {
             $_SESSION['error'] = 'Please login to update comments';
-            header('Location: /blog2/public/login');
+            header('Location: /blog/public/login');
             exit;
         }
         
@@ -25,7 +25,7 @@ class CommentController extends Controller
         
         if (!$comment) {
             $_SESSION['error'] = 'Comment not found';
-            header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/blog2/public/'));
+            header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/blog/public/'));
             exit;
         }
         
@@ -35,7 +35,7 @@ class CommentController extends Controller
         
         if (!$isOwner && !$isAdmin) {
             $_SESSION['error'] = 'You can only update your own comments';
-            header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/blog2/public/'));
+            header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/blog/public/'));
             exit;
         }
         
@@ -45,7 +45,7 @@ class CommentController extends Controller
        
         if (empty($content)) {
             $_SESSION['error'] = 'Comment content is required';
-            header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/blog2/public/'));
+            header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/blog/public/'));
             exit;
         }
         
@@ -59,7 +59,7 @@ class CommentController extends Controller
         }
         
        
-        header('Location: /blog2/public/article?id=' . $comment['article_id']);
+        header('Location: /blog/public/article?id=' . $comment['article_id']);
         exit;
     }
     
@@ -73,7 +73,7 @@ class CommentController extends Controller
        
         if (!isset($_SESSION['user_id'])) {
             $_SESSION['error'] = 'Please login to delete comments';
-            header('Location: /blog2/public/login');
+            header('Location: /blog/public/login');
             exit;
         }
         
@@ -81,7 +81,7 @@ class CommentController extends Controller
         
         if (!$comment) {
             $_SESSION['error'] = 'Comment not found';
-            header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/blog2/public/'));
+            header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/blog/public/'));
             exit;
         }
         
@@ -91,7 +91,7 @@ class CommentController extends Controller
         
         if (!$isOwner && !$isAdmin) {
             $_SESSION['error'] = 'You can only delete your own comments';
-            header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/blog2/public/'));
+            header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/blog/public/'));
             exit;
         }
         
@@ -108,7 +108,7 @@ class CommentController extends Controller
         }
         
       
-        header('Location: /blog2/public/article?id=' . $articleId);
+        header('Location: /blog/public/article?id=' . $articleId);
         exit;
     }
     
@@ -122,7 +122,7 @@ class CommentController extends Controller
         
         if (!isset($_SESSION['user_id'])) {
             $_SESSION['error'] = 'Please login to edit comments';
-            header('Location: /blog2/public/login');
+            header('Location: /blog/public/login');
             exit;
         }
         
@@ -130,7 +130,7 @@ class CommentController extends Controller
         
         if (!$comment) {
             $_SESSION['error'] = 'Comment not found';
-            header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/blog2/public/'));
+            header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/blog/public/'));
             exit;
         }
         
@@ -140,7 +140,7 @@ class CommentController extends Controller
         
         if (!$isOwner && !$isAdmin) {
             $_SESSION['error'] = 'You can only edit your own comments';
-            header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/blog2/public/'));
+            header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/blog/public/'));
             exit;
         }
         
@@ -153,7 +153,7 @@ class CommentController extends Controller
         
       
         $_SESSION['editing_comment_id'] = $id;
-        header('Location: /blog2/public/article?id=' . $comment['article_id']);
+        header('Location: /blog/public/article?id=' . $comment['article_id']);
         exit;
     }
 
@@ -163,7 +163,7 @@ public function store()
     
     if (!isset($_SESSION['user_id'])) {
         $_SESSION['error'] = 'Please login to comment';
-        header('Location: /blog2/public/login');
+        header('Location: /blog/public/login');
         exit;
     }
     
@@ -174,13 +174,13 @@ public function store()
    
     if (empty($article_id)) {
         $_SESSION['error'] = 'Article ID is required';
-        header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/blog2/public/'));
+        header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/blog/public/'));
         exit;
     }
     
     if (empty($content)) {
         $_SESSION['error'] = 'Comment content is required';
-        header('Location: /blog2/public/article?id=' . $article_id);
+        header('Location: /blog/public/article?id=' . $article_id);
         exit;
     }
     
@@ -188,7 +188,7 @@ public function store()
     $article = Article::find($article_id);
     if (!$article) {
         $_SESSION['error'] = 'Article not found';
-        header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/blog2/public/'));
+        header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/blog/public/'));
         exit;
     }
     
@@ -209,7 +209,7 @@ public function store()
     }
     
     
-    header('Location: /blog2/public/article?id=' . $article_id);
+    header('Location: /blog/public/article?id=' . $article_id);
     exit;
 }
 }

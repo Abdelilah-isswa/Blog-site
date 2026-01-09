@@ -21,7 +21,7 @@ class Router
 
     public function dispatch()
     {
-        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); //   /blog2/public/
+        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); //   /blog/public/
        
 
 

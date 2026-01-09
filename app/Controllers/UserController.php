@@ -11,7 +11,7 @@ class UserController extends Controller
     public function login()
     {
         if (isset($_SESSION['user_id'])) {
-            header('Location: /blog2/public/');
+            header('Location: /blog/public/');
             exit;
         }
         
@@ -33,7 +33,7 @@ class UserController extends Controller
         
         if (!$user) {
             $_SESSION['error'] = 'Invalid email or password';
-            header('Location: /blog2/public/login');
+            header('Location: /blog/public/login');
             exit;
         }
         
@@ -42,7 +42,7 @@ class UserController extends Controller
         
         if (!$isValid) {
             $_SESSION['error'] = 'Invalid email or password';
-            header('Location: /blog2/public/login');
+            header('Location: /blog/public/login');
             exit;
         }
         
@@ -52,14 +52,14 @@ class UserController extends Controller
         $_SESSION['user_email'] = $user['email'];
         $_SESSION['user_role'] = $user['user_role'];
         
-        header('Location: /blog2/public/');
+        header('Location: /blog/public/');
         exit;
     }
     public function logout()
     {
         session_unset();
         session_destroy();
-        header('Location: /blog2/public/login');
+        header('Location: /blog/public/login');
         exit;
     }
     
@@ -67,7 +67,7 @@ class UserController extends Controller
     public function register()
     {
         if (isset($_SESSION['user_id'])) {
-            header('Location: /blog2/public/');
+            header('Location: /blog/public/');
             exit;
         }
         
@@ -84,7 +84,7 @@ class UserController extends Controller
     public function registerPost()
     {
         if (isset($_SESSION['user_id'])) {
-            header('Location: /blog2/public/');
+            header('Location: /blog/public/');
             exit;
         }
         
@@ -135,7 +135,7 @@ class UserController extends Controller
                 'username' => $username,
                 'email' => $email
             ];
-            header('Location: /blog2/public/register');
+            header('Location: /blog/public/register');
             exit;
         }
         
@@ -151,11 +151,11 @@ class UserController extends Controller
         if ($result) {
             $_SESSION['success'] = 'Registration successful! Please login.';
             unset($_SESSION['old']);
-            header('Location: /blog2/public/login');
+            header('Location: /blog/public/login');
             exit;
         } else {
             $_SESSION['error'] = 'Registration failed. Please try again.';
-            header('Location: /blog2/public/register');
+            header('Location: /blog/public/register');
             exit;
         }
     }
