@@ -109,6 +109,37 @@ class User
         
         return $stmt->execute();
     }
-
+    public static function delete($id)
+    {
+        $conn = self::getConnection();
+        $sql = "DELETE FROM User WHERE user_id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        return $stmt->rowCount();
+    }
+    
+    public static function getAll()
+    {
+        $conn = self::getConnection();
+        $sql = "SELECT * FROM User ORDER BY create_at DESC";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+    
+    public static function count()
+    {
+        $conn = self::getConnection();
+        $sql = "SELECT COUNT(*) as count FROM User";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['count'];
+    }
+    
+    public static function verifyPassword($inputPassword, $hashedPassword)
+    {
+        return password_verify($inputPassword, $hashedPassword);
+    }
 
 }
